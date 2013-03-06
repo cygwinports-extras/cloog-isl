@@ -1,0 +1,23 @@
+NAME="cloog-isl"
+VERSION=0.18.0
+RELEASE=1
+CATEGORY="Libs"
+SUMMARY="Chunky Loop Generator library"
+DESCRIPTION="CLooG is a free software and library to generate code for scanning
+Z-polyhedra. That is, it finds a code (e.g. in C, FORTRAN...) that reaches each
+integral point of one or more parameterized polyhedra. "
+HOMEPAGE="http://www.cloog.org/"
+SRC_URI="ftp://gcc.gnu.org/pub/gcc/infrastructure/cloog-${VERSION}.tar.gz"
+SRC_DIR="cloog-${VERSION}"
+
+PKG_NAMES="cloog-isl libcloog-isl4 libcloog-isl-devel"
+cloog_isl_CONTENTS="usr/bin/cloog-isl.exe usr/share/"
+libcloog_isl4_SUMMARY="${SUMMARY} (runtime)"
+libcloog_isl4_CONTENTS="usr/bin/cygcloog-isl-4.dll"
+libcloog_isl_devel_SUMMARY="${SUMMARY} (development)"
+libcloog_isl_devel_CONTENTS="usr/include/${NAME}/ usr/lib/"
+
+# make this fully parallel-installable with cloog-ppl
+CYGCONF_ARGS="--program-suffix=-isl --includedir=/usr/include/${NAME} --with-isl=system"
+MAKEOPTS+=" LDFLAGS=-no-undefined"
+KEEP_LA_FILES="none"
